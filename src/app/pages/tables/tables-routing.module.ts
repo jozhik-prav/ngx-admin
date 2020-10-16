@@ -7,17 +7,7 @@ import { TreeGridComponent } from './tree-grid/tree-grid.component';
 
 const routes: Routes = [{
   path: '',
-  component: TablesComponent,
-  children: [
-    {
-      path: 'smart-table',
-      component: SmartTableComponent,
-    },
-    {
-      path: 'tree-grid',
-      component: TreeGridComponent,
-    },
-  ],
+  component: SmartTableComponent,
 }];
 
 @NgModule({
