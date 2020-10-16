@@ -26,29 +26,35 @@ export class SmartTableComponent {
       confirmDelete: true,
     },
     columns: {
-      id: {
-        title: 'ID',
+      type: {
+        title: 'Тип',
         type: 'number',
+        valuePrepareFunction(cell:number) {
+          switch (cell){
+            case 0: return 'Физическое лицо'
+            case 1: return 'Юридическое лицо'
+            default: return 'Такого не может быть'
+          }
+        }
       },
-      firstName: {
-        title: 'First Name',
+      name: {
+        title: 'Наименование/ФИО',
         type: 'string',
       },
-      lastName: {
-        title: 'Last Name',
+      createDate: {
+        title: 'Дата создания/дата рождения',
+        type: 'date',
+        valuePrepareFunction(cell:Date) {
+          return cell.toLocaleDateString();
+        }
+      },
+      address: {
+        title: 'Адрес регистрации/юр. адрес',
         type: 'string',
       },
-      username: {
-        title: 'Username',
+      inn: {
+        title: 'ИНН',
         type: 'string',
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string',
-      },
-      age: {
-        title: 'Age',
-        type: 'number',
       },
     },
   };
