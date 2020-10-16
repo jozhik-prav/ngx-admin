@@ -6,7 +6,7 @@ export class SmartTableService extends SmartTableData {
 
   data = [{
     id: 1,
-    type: 0,
+    type: '0',
     name: 'Otto',
     createDate: new Date(2020, 5, 16),
     address: 'г.Москва',

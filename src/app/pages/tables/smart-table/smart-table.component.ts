@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DatepickerComponent } from 'app/pages/forms/datepicker/datepicker.component';
 import { LocalDataSource } from 'ng2-smart-table';
 
 import { SmartTableData } from '../../../@core/data/smart-table';
@@ -29,11 +30,18 @@ export class SmartTableComponent {
       type: {
         title: 'Тип',
         type: 'number',
-        valuePrepareFunction(cell:number) {
+        valuePrepareFunction(cell:string) {
           switch (cell){
-            case 0: return 'Физическое лицо'
-            case 1: return 'Юридическое лицо'
+            case '0': return 'Физическое лицо'
+            case '1': return 'Юридическое лицо'
             default: return 'Такого не может быть'
+            
+          }
+        },
+        editor: {
+          type: 'list',
+          config: {
+            list: [{ value: 0, title: 'Физическое лицо' }, { value: 1, title: 'Юридическое лицо' }]
           }
         }
       },
@@ -43,10 +51,10 @@ export class SmartTableComponent {
       },
       createDate: {
         title: 'Дата создания/дата рождения',
-        type: 'date',
+        type: 'string',
         valuePrepareFunction(cell:Date) {
           return cell.toLocaleDateString();
-        }
+        },
       },
       address: {
         title: 'Адрес регистрации/юр. адрес',
