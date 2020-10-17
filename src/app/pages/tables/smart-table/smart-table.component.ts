@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { DatepickerComponent } from 'app/pages/forms/datepicker/datepicker.component';
 import { LocalDataSource } from 'ng2-smart-table';
-
+import { InjiService } from './inji.service';
 import { SmartTableData } from '../../../@core/data/smart-table';
+import { StatByAccountsComponent } from './stat-by-accounts/stat-by-accounts.component';
 
 @Component({
   selector: 'ngx-smart-table',
@@ -25,6 +25,9 @@ export class SmartTableComponent {
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
+    },
+    actions: {
+      columnTitle: 'Действия'
     },
     columns: {
       type: {
@@ -65,13 +68,17 @@ export class SmartTableComponent {
         type: 'string',
       },
     },
+    rowClassFunction: (row) => {
+      return `row-${row.data.id}`;
+    }
   };
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: SmartTableData) {
+  constructor(private service: SmartTableData, private InjiService: InjiService) {
     const data = this.service.getData();
     this.source.load(data);
+    
   }
 
   onDeleteConfirm(event): void {
@@ -80,5 +87,14 @@ export class SmartTableComponent {
     } else {
       event.confirm.reject();
     }
+  }
+
+  expanededComp: any = null;
+
+  onRowClick(event): void {
+   /*const closestParent = event.target.closest("tr.ocean-st-row");
+     this.expanededComp = this.InjiService.appendComponent(HelloComponent, event.data, closestParent);*/
+     const closestParent = document.querySelector(`tr.row-${event.data.id}`);
+     this.expanededComp = this.InjiService.appendComponent(StatByAccountsComponent, event.data, closestParent);
   }
 }
