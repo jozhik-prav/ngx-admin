@@ -116,6 +116,13 @@ export const NB_CORE_PROVIDERS = [
             success: '/'
           }
         },
+        register: {
+          endpoint: '/users',
+          method: 'POST',
+          redirect: {
+            success: '/'
+          }
+        },
         token: {
           class: NbAuthJWTToken,
           key: 'token',
