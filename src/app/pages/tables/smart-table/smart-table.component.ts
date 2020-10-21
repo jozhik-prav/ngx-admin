@@ -89,12 +89,18 @@ export class SmartTableComponent {
     }
   }
 
+  isOpen:boolean = false;
   expanededComp: any = null;
 
   onRowClick(event): void {
-   /*const closestParent = event.target.closest("tr.ocean-st-row");
-     this.expanededComp = this.InjiService.appendComponent(HelloComponent, event.data, closestParent);*/
+    if(this.isOpen){
+      this.InjiService.removeComponent(this.expanededComp);
+      this.expanededComp = null;
+      this.isOpen = false;
+    }else{
      const closestParent = document.querySelector(`tr.row-${event.data.id}`);
      this.expanededComp = this.InjiService.appendComponent(StatByAccountsComponent, event.data, closestParent);
+     this.isOpen = true;
+    }
   }
 }
